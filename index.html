@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+    <title>Identity Technologies on the Web: A Primer</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <!-- 
+      === NOTA BENE ===
+      For the three scripts below, if your spec resides on dev.w3 you can check them
+      out in the same tree and use relative links so that they'll work offline,
+     -->
+    
+    
+
+<style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #ff4500;
+}
+
+
+/* --- --- */
+ol.algorithm { counter-reset:numsection; list-style-type: none; }
+ol.algorithm li { margin: 0.5em 0; }
+ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+</style><link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED"></head>
+
+
+
+<body style="background-repeat: no-repeat; background-image: url(logo-BG-ED.png); "><div class="head">
+  <p>
+    
+      <a href="http://www.w3.org/"><img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+    
+  </p>
+  <h1 class="title" id="title">Identity Technologies on the Web: A Primer</h1>
+  
+  <h2 id="w3c-editor-s-draft-02-april-2013"><abbr title="World Wide Web Consortium">W3C</abbr> BG Note Editor's Draft 02 April 2013</h2>
+  <dl>
+
+      <dt>This Version:</dt>
+      <dd><a href="http://webandbroadcasting.github.com/id-tech-on-the-web-a-primer/">http://webandbroadcasting.github.com/id-tech-on-the-web-a-primer/</a></dd>
+      <dt>Latest Editor's Draft:</dt>
+      <dd><a href="http://webandbroadcasting.github.com/id-tech-on-the-web-a-primer/">http://webandbroadcasting.github.com/id-tech-on-the-web-a-primer/</a></dd>
+    
+    
+    
+    <dt>Editors:</dt>
+    <dd><span>Takahiro Sakai</span>, WOWOW INC.</dd>
+<dd><span>Kenji Fukuda</span>, WOWOW INC.</dd>
+<dd><a href="mailto:yfuna@tomo-digi.co.jp">Yosuke Funahashi</a>, <a href="http://www.tomo-digi.co.jp">Tomo-Digi Corporation</a></dd>
+
+    
+  </dl>
+  
+  
+  
+  
+    
+<p class="copyright">
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 
+    2013
+    the Contributors to the Identity Technologies on the Web: A Primer Note, published by the
+    <a href="http://www.w3.org/community/webandbroadcasting/">Web and Broadcasting Business Group</a> under the
+    
+      <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>.
+      A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
+    
+  </p>
+    
+  
+  <hr>
+</div>
+
+
+
+
+
+
+
+
+
+<section id="abstract" class="introductory"><h2>Abstract</h2><p>
+<section>
+<h3 id="purpose-of-this-document">Purpose of This Document</h3>
+The goal of this document is to provide a succinct summary of various identity-related technologies developed in and around <abbr title="World Wide Web Consortium">W3C</abbr> that increase the capabilities of Media applications on the Web, and how they apply more specifically in a broadcasting-industry context.
+</section>
+
+<section>
+<h3 id="target-audience">Target Audience</h3>
+This note is aimed at those who are unfamiliar with current identity technologies on the Web. Specifically, this note has been authored with broadcasters, ad agencies, non-web developers and end-users in mind. We hope that after reading this note readers will have a better understanding of identity technologies and that they will be better prepared to consider business and/or service models using these technologies with broadcasting.
+</section>
+</p></section>
+<section id="sotd" class="introductory"><h2>Status of This Document</h2>
+  
+
+<p>
+    This note was published by the <a href="http://www.w3.org/community/webandbroadcasting/">Web and Broadcasting Business Group</a>.
+    It is not a W3C Standard nor is it on the W3C Standards Track.
+    
+      Please note that under the 
+      <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>
+      there is a limited opt-out and other conditions apply.
+    
+    Learn more about 
+    <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.
+  </p>
+      
+    
+  
+</section>
+<section id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a href="#identity-technologies" class="tocxref"><span class="secno">1. </span>Identity Technologies</a><ul class="toc"><li class="tocline"><a href="#openid" class="tocxref"><span class="secno">1.1 </span>OpenID</a></li><li class="tocline"><a href="#webid" class="tocxref"><span class="secno">1.2 </span>WebID</a></li></ul></li><li class="tocline"><a href="#related-technologies" class="tocxref"><span class="secno">2. </span>Related Technologies</a><ul class="toc"><li class="tocline"><a href="#oauth-1.0" class="tocxref"><span class="secno">2.1 </span>OAuth 1.0</a></li><li class="tocline"><a href="#oauth-2.0" class="tocxref"><span class="secno">2.2 </span>OAuth 2.0</a></li><li class="tocline"><a href="#web-cryptography-api" class="tocxref"><span class="secno">2.3 </span>Web Cryptography API</a></li><li class="tocline"><a href="#encrypted-media-extensions-eme" class="tocxref"><span class="secno">2.4 </span>Encrypted Media Extensions (EME)</a></li><li class="tocline"><a href="#foaf" class="tocxref"><span class="secno">2.5 </span>FOAF</a></li></ul></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li></ul></section>
+
+<section id="identity-technologies">
+<!--OddPage--><h2><span class="secno">1. </span>Identity Technologies</h2>
+
+<section id="openid">
+<h3><span class="secno">1.1 </span>OpenID</h3>
+<div style="float: right; clear: right; margin-bottom: .5em; margin-left: 10px;"><div style="width: 182px; border: 1px solid #ccc; background-color: #f9f9f9; padding: 3px !important; font-size: 94%; text-align: center; overflow: hidden;"><a href="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/b/b4/WebAndIdentity_openid.png/800px-WebAndIdentity_openid.png" title="OpenID"><img alt="" src="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/b/b4/WebAndIdentity_openid.png/800px-WebAndIdentity_openid.png" width="180" border="0" style="border: 1px solid #ccc; background-color: #f9f9f9; font-size: 94%; text-align: center; overflow: hidden;"></a>OpenID</div></div>
+<ul>
+<li> Characteristics
+<ul>
+<li> OpenID is an <b>open standard for authentication</b>.</li>
+<li> OpenID is a decentralized Single Sign On system for the Web.</li>
+<li> OpenID is a URI, e.g. <a href="http://yosukef.myopenid.com/"> http://yosukef.myopenid.com/</a></li>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: OpenID Foundation [<a href="http://openid.net/#gsc.tab=0">site</a>]</li>
+<li> Creation Date: Summer, 2005</li>
+<li> Adoption: Over one billion OpenID-enabled user accounts and over 50,000 websites accepting OpenID for logins [<a href="http://openid.net/get-an-openid/what-is-openid/">page</a>]</li>
+<li> License: Non-exclusive, royalty free, worldwide copyright license [<a href="http://openid.net/wordpress-content/uploads/2012/04/OIDF-Specification-License-Out-Resolution-OIDF-BOARD-APPROVED-March-1-2012.pdf">pdf</a>]</li>
+<li> Specs: <a href="http://openid.net/specs/openid-authentication-2_0.html">OpenID Authentication 2.0</a></li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> Authentication</li>
+<ul>
+<li> SSO</li>
+<li> Ownable and movable identity</li>
+</ul>
+<li> Profile management</li>
+<ul>
+<li> Simplified registration process on each OpenID-enabled web site.</li>
+</ul>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> End-user</li>
+<li> OpenID Provider (OP)</li>
+<ul>
+<li> OP stores and authenticates End-user's credentials and profiles, and is responsible for securing them and providing them to other web services.</li>
+</ul>
+<li> Relying Party (RP)</li>
+<ul>
+<li> RP is any web service that relies on OP(s) for End-user authentication.</li>
+</ul>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> End-user creates his or her OpenID at an OP's web site.</li>
+<li> RP maintains a list of OPs that the RP relies on.</li>
+<li> OP authenticates End-user with OpenID. RP doesn't.</li>
+<li> End-user can login to any RP web site using his or her OpenID with the help of an OP.</li>
+<li> End-user can't login to RP web sites if the RPs don't rely on the OP that the End-user has designated.</li>
+<li> End-user can change OP and maintain his or her OpenID if they provided a URI at the time they created the OpenID.</li>
+<li> End-user can simplify common profile information and store it centrally.</li>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> Anybody can become an OP without the need for permission or a license from any party.</li>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> <a href="http://openid.net/specs/openid-authentication-2_0.html">OpenID Authentication 2.0</a></li>
+</ul>
+</li>
+</ul></section>
+
+<section id="webid">
+<h3><span class="secno">1.2 </span>WebID</h3>
+<div style="float: right; clear: right; margin-bottom: .5em; margin-left: 10px;"><div style="width: 182px; border: 1px solid #ccc; background-color: #f9f9f9; padding: 3px !important; font-size: 94%; text-align: center; overflow: hidden;"><a href="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/8/89/WebAndIdentity_webid.png/800px-WebAndIdentity_webid.png" title="WebID"><img alt="" src="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/8/89/WebAndIdentity_webid.png/800px-WebAndIdentity_webid.png" width="180" border="0" style="border: 1px solid #ccc; background-color: #f9f9f9; font-size: 94%; text-align: center; overflow: hidden;"></a>WebID</div></div>
+<ul>
+<li> Characteristics
+<ul>
+<li> WebID is an <b>open standard for authentication</b>.</li>
+<li> WebID is a Hash URI, e.g. <a href="http://www.w3.org/People/Berners-Lee/card#i"> http://www.w3.org/People/Berners-Lee/card#i</a> that points to a person's WebID Profile document, a type of web page that must be available in Turtle format, but may also be available in other RDF serialisation formats from the same URLs.</li>
+<ul>
+<li> A Hash URI contains a fragment, a special part that is separated from the rest of the URI by a hash symbol (“#”).</li>
+</ul>
+<li> The WebID protocol is an authentication protocol on the Web. It enables people to authenticate onto WebID-enabled sites by selecting one of the certificates installed in their keychain through a web browser. CAs and anybody using X.509 tools can create these certificates.</li>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: <abbr title="World Wide Web Consortium">W3C</abbr>/WebID CG [<a href="http://www.w3.org/2005/Incubator/webid/wiki/Main_Page">wiki</a>]</li>
+<li> Creation Date:</li>
+<li> Adoption:</li>
+<li> License: Royalty Free</li>
+<li> Specs: <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0 Identification and Discover</a>, <a href="http://www.w3.org/2005/Incubator/webid/spec/">WebID 1.0 Authentication over TLS</a></li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> Authentication</li>
+<ul>
+<li> SSO</li>
+<li> Ownable and movable identity</li>
+<li> Independently issued X.509 certificates as credentials</li>
+<li> Non-hierarchical approach and web of trust</li>
+</ul>
+<li> Profile management</li>
+<ul>
+<li> Fully integrated profiles</li>
+<li> FOAF ontology</li>
+</ul>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> Alice</li>
+<ul>
+<li> Alice is an agent who owns a Server which runs a service which Bob wishes to access</li>
+</ul>
+<li> Bob</li>
+<ul>
+<li> Bob is an agent who uses a Client to connect to Alice's service</li>
+</ul>
+<li> Client</li>
+<ul>
+<li> The Client initiates a request to a service listening on a specific port using a given protocol on a given Server. It can request authentication credentials from a keychain to send to a server</li>
+<li> In the scenarios below, "Client" means a web browser.</li>
+</ul>
+<li> Server</li>
+<ul>
+<li> A Server is a machine contactable at a domain name or IP address that hosts a number of globally accessible services.</li>
+<li> In the scenarios below, "Server" means a web server.</li>
+</ul>
+<li> WebID Profile Service</li>
+<ul>
+<li> A web service that creates, stores and publishes WebID Profile documents.</li>
+</ul>
+<li> WebID Certificate Issuer</li>
+<ul>
+<li> An entity that issues X.509 certificates specified in the WebID standard such as CAs and engineers who use X.509 tools.</li>
+</ul>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> Create a WebID Profile document at a WebID Profile Service</li>
+<ul>
+<li>Bob accesses a WebID Profile Service and enters private information he wants to publicly share, then he defines his hash fragment included in the WebID URL.</li>
+<li>The WebID Profile Service creates and stores Bob's profile document containing his private information. The URL of the profile document is his WebID and is now published and publicly accessible.</li>
+</ul>
+<li> Create a certificate bound to the WebID or WebID Profile document</li>
+<ul>
+<li>Bob provides his WebID to a WebID Certificate Issuer.</li>
+<ul>
+<li>WebID certificates are based on public key encryption technology and are in X.509 format. Certificates contain public key information and keychains in the end-user's environments store private keys.</li>
+<li>Incidentally, Bob could issue his own certificate if he had the skills and tools to create a certificate.</li>
+</ul>
+<li>The WebID Certificate Issuer returns a certificate tied to his WebID which is then stored in the keychain of Bob's Client.</li>
+<li>Bob provides the WebID Profile Service with the public key in the certificate. The WebID Profile Service publishes the public key as a part of his WebID document.</li>
+</ul>
+<li>Sign on a WebID-enabled site with the WebID</li>
+<ul>
+<li>Bob accesses Alice's Server that provides web services and requires authentication. The Server is WebID-enabled.</li>
+<li>Bob selects the WebID sign-on option in a pop-up window shown by the Client.</li>
+<li>Bob's Client shows a list of certificates in its keychain.</li>
+<li>Bob selects a certificate bound to his WebID and the Client sends the certificate and a token signed by his private key to the Server.</li>
+<li>The Server verifies Bob's identity in two steps:</li>
+<ul>
+<li>Step 1: Verify that Bob owns the certificate</li>
+<ul>
+<li>Receive the certificate and token</li>
+<li>Verify that the token was signed by the private key paired to the public key in the certificate</li>
+</ul>
+<li>Step 2: Verify this same Bob also owns the WebID Profile document</li>
+<ul>
+<li>Retrieve the profile document from the WebID or a Hash URI contained in the certificate</li>
+<li>Extract a public key (a modulus and public exponent) from the profile document</li>
+<li>Verify that the public key is identical to those in the certificate</li>
+</ul>
+</ul>
+<li>If verification succeeds, the Server allows the Client to access its services.</li>
+</ul>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> Authorization by FOAF and WebID</li>
+<ul>
+<li>As described in FOAF section below, the combination of FOAF and WebID forms a decentralised authorization service. WebID is therefore superior to other identity technologies in this way because WebID employs user profile documents as its essential building block and the vocabulary of this building block is FOAF.</li>
+</ul>
+<li> Certificate Authority (CA)</li>
+<ul>
+<li>Certificate authority, or certification authority, (CA) is an entity that issues digital certificates such as those used by HTTPS to secure transactions and to guarantee identity of servers and in some cases clients.</li>
+</ul>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> <a href="http://bblfish.net/blog/2011/05/25/">WebID and Browsers</a></li>
+<li> <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0 Identification and Discover</a></li>
+<li> <a href="http://www.w3.org/2005/Incubator/webid/spec/">WebID 1.0 Authentication over TLS</a></li>
+</ul>
+</li>
+</ul></section>
+</section>
+
+<section id="related-technologies">
+<!--OddPage--><h2><span class="secno">2. </span>Related Technologies</h2>
+
+<section id="oauth-1.0">
+<h3><span class="secno">2.1 </span>OAuth 1.0</h3>
+<div style="float: right; clear: right; margin-bottom: .5em; margin-left: 10px;"><div style="width: 182px; border: 1px solid #ccc; background-color: #f9f9f9; padding: 3px !important; font-size: 94%; text-align: center; overflow: hidden;"><a href="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/2/2b/WebAndIdentity_oauth1.png/800px-WebAndIdentity_oauth1.png" title="OAuth 1.0"><img alt="" src="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/2/2b/WebAndIdentity_oauth1.png/800px-WebAndIdentity_oauth1.png" width="180" border="0" style="border: 1px solid #ccc; background-color: #f9f9f9; font-size: 94%; text-align: center; overflow: hidden;"></a>OAuth 1.0</div></div>
+<ul>
+<li> Characteristics
+<ul>
+<li> OAuth 1.0 is an <b>open standard for authentication</b>to access web service APIs..</li>
+<li> OAuth 1.0 is a protocol that enables clients to access server resources on behalf of a resource owner (such as a different client or an end-user).</li>
+<ul>
+<li>OAuth 1.0 provides a process for end-users to authorize third-party access to their server resources without sharing their credentials (typically, a username and password pair), using user-agent redirections.</li>
+</ul>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: IETF/Web Authorization Protocol (OAuth) WG [<a href="http://datatracker.ietf.org/wg/oauth/charter/">charter</a>]</li>
+<li> Creation Date: October, 2007</li>
+<li> Adoption: See <a href="http://en.wikipedia.org/wiki/OAuth#List_of_OAuth_service_providers">Wikipedia:OAuth:List of OAuth Service Providers</a></li>
+<li> License: <a href="http://www.ietf.org/ipr/">IETF IPR</a></li>
+<li> Specs: OAuth Core 1.0 (<a href="http://tools.ietf.org/html/rfc5849">RFC 5849</a>)</li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> Authorization for web service APIs</li>
+</ul>
+</li>
+
+<li> Caution about Terminology
+<ul>
+<li> In the OAuth 1.0 specification, the definition and terminology used for user, client and server is unique. So beware.</li>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> Resource Owner (RO)</li>
+<ul>
+<li> An entity capable of accessing and controlling protected resources by using credentials to authenticate with the server.</li>
+</ul>
+<li> Client</li>
+<ul>
+<li> A front-end user terminal and back-end web server capable of making OAuth-1.0-authenticated requests form a team to become an OAuth 1.0 Client.</li>
+</ul>
+<li> Server</li>
+<ul>
+<li> An HTTP server capable of accepting OAuth-1.0-authenticated requests.</li>
+</ul>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> RO has an account on a Server. RO uploads private data to the Server.</li>
+<li> RO accesses a Client to use a service they provide for processing the private data on the Server.</li>
+<li> RO requests the Client to execute the process.</li>
+<li> The Client asks the Server for their availability using temporary credentials they've agreed to in advance. If the Server is available, the user-terminal shows the login page of the Server using HTTP redirect mechanism.</li>
+<li> RO logs in to the Server and tells the Server to allow the Client to access the private data.</li>
+<li> The user-terminal redirects back to the Client and this tells the Client that now it has right to access the private data.</li>
+<li> The Client starts to execute the process, including retrieving the private data from the Server.</li>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> Pseudo-authentication by OAuth 1.0</li>
+<ul>
+<li>OAuth 1.0 was designed to provide a feature that OpenID lacked, a feature which enables end-users to authorise a web service provider to use their data stored on other web service providers' servers. However, once OAuth 1.0 was created, web service providers who implemented OAuth 1.0 realized that sharing end-user's data among web service providers is *the* key feature which allows web service providers to collaboratively offer better service to end-users. They soon realised that SSO was unnecessary to achieve that goal.</li>
+<li>OAuth 1.0 provides a unique kind of authentication called "pseudo-authentication." "An end-user allows a web service provider to access something private"-- this scenario, if the whole system is secure, allows for sufficient authentication of the end-user by the web service provider. Ultimately, it is the shared body of data of an end-user that is their identity, and what service providers need to know is not who end-user is in the real world but who owns the data to be processed, who allows them to access the data and who will pay for the services.</li>
+</ul>
+<li>Currently, some people are saying, "OAuth 1.0 Revision A (1.0a) is better than OAuth 1.0 because of a security enhancement." This is misleading because no specification document named "OAuth Core 1.0a" exists, therefore please don't waste your time looking for it.</li>
+<li>The use of OAuth 1.0 with any transport protocol other than HTTP is not defined in <a href="http://tools.ietf.org/html/rfc5849">RFC 5849</a>.</li>
+<li>OAuth 1.0 is not compatible with OAuth 2.0.</li>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> <a href="http://hueniverse.com/oauth/guide/">The OAuth 1.0 Guide</a></li>
+</ul>
+</li>
+</ul></section>
+
+<section id="oauth-2.0">
+<h3><span class="secno">2.2 </span>OAuth 2.0</h3>
+<div style="float: right; clear: right; margin-bottom: .5em; margin-left: 10px;"><div style="width: 182px; border: 1px solid #ccc; background-color: #f9f9f9; padding: 3px !important; font-size: 94%; text-align: center; overflow: hidden;"><a href="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/8/86/WebAndIdentity_oauth2.png/800px-WebAndIdentity_oauth2.png" title="OAuth 2.0"><img alt="" src="http://www.w3.org/community/webandbroadcasting/wiki/images/thumb/8/86/WebAndIdentity_oauth2.png/800px-WebAndIdentity_oauth2.png" width="180" border="0" style="border: 1px solid #ccc; background-color: #f9f9f9; font-size: 94%; text-align: center; overflow: hidden;"></a>OAuth 2.0</div></div>
+<ul>
+<li> Characteristics
+<ul>
+<li> OAuth 2.0 is an <b>open standard for authentication</b>to access web service APIs.</li>
+<li> OAuth 2.0 is a framework that enables creating authorization protocols through customization and extension.</li>
+<li> Protocols based on OAuth 2.0 enable clients to access resources on a Resource Server on behalf of a Resource Owner (such as a different client or an end-user) through Authorization Servers.</li>
+<ul>
+<li>OAuth 2.0 provides a process for end-users to grant third-party access to their server resources without sharing their credentials (typically, a username and password pair), using user-agent redirections.</li>
+<li>OAuth 2.0 includes an SSO feature as a way of granting access to restricted resources in other web applications.</li>
+</ul>
+<li> OAuth 2.0, as a framework, covers native applications such as desktop applications and mobile device applications, but still needs each implementor to define the details.</li>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: IETF/Web Authorization Protocol (OAuth) WG [<a href="http://datatracker.ietf.org/wg/oauth/charter/">charter</a>]</li>
+<li> Creation Date: October 2012</li>
+<li> Adoption: See <a href="http://en.wikipedia.org/wiki/OAuth#List_of_OAuth_service_providers">Wikipedia:OAuth:List of OAuth Service Providers</a></li>
+<li> License: <a href="http://www.ietf.org/ipr/">IETF IPR</a></li>
+<li> Specs: OAuth 2.0 (<a href="http://tools.ietf.org/html/rfc6749">RFC 6749</a>)</li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> Authorisation for web service APIs</li>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> Resource Owner (RO)</li>
+<ul>
+<li> An entity capable of granting access to a protected resource. When the resource owner is a person, it is referred to as an end-user.</li>
+</ul>
+<li> Resource Server (RS)</li>
+<ul>
+<li> The server hosting the protected resources, capable of accepting and responding to protected resource requests using access tokens.</li>
+</ul>
+<li> Client</li>
+<ul>
+<li> An application making protected resource requests on behalf of the resource owner and with its authorization. The term "client" does not imply any particular implementation characteristics (e.g., whether the application executes on a server, a desktop, or other devices).</li>
+</ul>
+<li> Authorization Server (AS)</li>
+<ul>
+<li> The server issuing access tokens to the client after successfully authenticating the resource owner and obtaining authorization.</li>
+</ul>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> RO has an account on a RS. RO uploads private data to the RS.</li>
+<li> RO accesses a Client to use a service they provide for processing the private data on the RS.</li>
+<li> RO requests the Client to execute the process.</li>
+<li> The Client asks an AS for RS's availability using a client id and password. If the RS is available, the Client starts executing the process, including retrieving the private data from the Server.</li>
+<ul>
+<li>If this is the first time, the Client accesses an AS bound to the RS to get a client ID and set a password for later use. The registration process requires the Client to prove that it is acting on behalf of the RO. Two examples of this are through either outsourcing the task to the RS using URI redirections or the Client actually logging into the RS by obtaining from the RO his or her credentials to the RS.</li>
+</ul>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> The major differences between 1.0 and 2.0</li>
+<ul>
+<li>2.0 is a framework that can be extended and customized while 1.0 is a complete specification that defines almost all aspects of the protocol enabling developers to create interoperable implementations. 2.0 provides developers with better flexibility to create their systems by combining OAuth and other technologies, but it also means the definition of OAuth is blurred in 2.0.</li>
+<li>2.0 adopted TLS as its sole security layer while 1.0 defined its own secure protocol without help from other securing layers, including TLS. This transition has benefits and risks for developers and service providers using OAuth. For example, 2.0 doesn't require developers to implement the full protocol stacks specified by 1.0 but requires careful security considerations because 2.0 can create security holes. These holes are chiefly due to the nature of the framework lacking full consideration of security upon standardization and the inevitable combination of 2.0's broad extensibility and outsourced security protocol.</li>
+</ul>
+<li>Pseudo-authentication by OAuth 2.0</li>
+<ul>
+<li>OAuth 2.0 is capable of similar pseudo-authentication by OAuth 1.0.</li>
+</ul>
+<li>OAuth 2.0 is not backward compatible with OAuth 1.0</li>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> OAuth 2.0 (<a href="http://tools.ietf.org/html/rfc6749">RFC 6749</a>)</li>
+</ul>
+</li>
+</ul></section>
+
+<section id="web-cryptography-api">
+<h3><span class="secno">2.3 </span>Web Cryptography API</h3>
+<ul>
+<li> Characteristics
+<ul>
+<li> Web Cryptography API is a JavaScript API for performing basic cryptographic operations in web applications, such as hashing, signature generation and verification, encryption and decryption, and for generating and/or managing the keying material necessary to perform these operations.</li>
+<li> Using the Web Cryptography API you can implement secure device and user authentication functions similar to what already exists in VOD services on the Web.</li>
+<ul>
+<li>The benefit or risk of using the Web Cryptography API is that web browsers can have full control over secure transactions, while existing VOD services use proprietary solutions or lower layer standards such as TLS which prohibits web browsers from accessing or controlling the transactions.</li>
+</ul>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: <abbr title="World Wide Web Consortium">W3C</abbr>/Web Cryptography WG [<a href="http://www.w3.org/2011/11/webcryptography-charter.html">charter</a>] [<a href="http://www.w3.org/2012/webcrypto/">site</a>]</li>
+<li> Creation Date: September, 2012 (FPWD)</li>
+<li> Adoption: N/A</li>
+<li> License: Royalty Free (<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>)</li>
+<li> Specs: <a href="https://dvcs.w3.org/hg/webcrypto-api/raw-file/tip/spec/Overview.html">Web Cryptography API</a></li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> See Primary Scenarios</li>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> See Primary Scenarios</li>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> See <a href="https://dvcs.w3.org/hg/webcrypto-usecases/raw-file/tip/Overview.html#video-service">Web Cryptography API Use Cases: Video Services</a></li>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> N/A</li>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> <abbr title="World Wide Web Consortium">W3C</abbr>/Web Cryptography WG [<a href="http://www.w3.org/2012/webcrypto/">site</a>]</li>
+</ul>
+</li>
+</ul></section>
+
+<section id="encrypted-media-extensions-eme">
+<h3><span class="secno">2.4 </span>Encrypted Media Extensions (EME)</h3>
+<ul>
+<li> Characteristics
+<ul>
+<li> EME is an <b>open standard for authorization</b> to play protected content such as audio and video.</li>
+<li> EME is a vendor-neutral extension for HTML5 which extends HTMLMediaElement by adding APIs that control playback of protected content.</li>
+<ul>
+<li>For more on the extensibility of HTML 5, see <a href="http://www.w3.org/TR/html5/infrastructure.html#extensibility">http://www.w3.org/TR/html5/infrastructure.html#extensibility</a></li>
+</ul>
+<li> EME defines APIs that enable web browsers to control key exchanges between Content Decryption Modules in devices and corresponding License Servers on the Web.</li>
+<ul>
+<li>EME is a building block to implement UIs for proprietary DRM systems.</li>
+<li>DRM systems can be implemented on top of web browsers using EME and open source encryption technologies, if that could be called a DRM system.</li>
+</ul>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: <abbr title="World Wide Web Consortium">W3C</abbr>/HTML WG</li>
+<li> Creation Date: January, 2013 (Produced a candidate FPWD)</li>
+<li> Adoption: N/A</li>
+<li> License: Royalty Free (<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>)</li>
+<li> Specs: <a href="https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html">Editor's Draft</a></li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> See Primary Scenarios</li>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> See Primary Scenarios</li>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> See <a href="https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html#faq-use-cases">https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html#faq-use-cases</a></li>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> EME triggered <abbr title="World Wide Web Consortium">W3C</abbr>'s decision that support for "protected content" is "in-scope" for HTML.</li>
+</ul>
+</li>
+
+<li> Further Reading
+<ul>
+<li> <a href="https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html">Editor's Draft</a></li>
+</ul>
+</li>
+</ul></section>
+
+<section id="foaf">
+<h3><span class="secno">2.5 </span>FOAF</h3>
+<ul>
+<li> Characteristics
+<ul>
+<li> FOAF (Friend of a friend) is an <b>open standard for the ontology used in people's profiles</b>.</li>
+<li> Each FOAF profile has a unique identifier (such as a personal e-mail address, a Jabber ID, an OpenID, a WebID, or a URI of a personal homepage/weblog), which is used when defining relationships between profiles.</li>
+<li> FOAF allows the profiles of people to describe social networks without the need for a centralised database.</li>
+<li> FOAF profiles are in file formats such as RDF/XML (see the example below) and Turtle or embeddable formats such as Microdata and RDFa.</li>
+<pre style="border: 1px dashed #2f6fab; background-color: #f9f9f9; padding: 1em; line-height: 1.1em;">&lt;rdf:RDF
+    xmlns:rdf="<a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#" class="external free" title="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rel="nofollow">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a>"
+    xmlns:rdfs="<a href="http://www.w3.org/2000/01/rdf-schema#" class="external free" title="http://www.w3.org/2000/01/rdf-schema#" rel="nofollow">http://www.w3.org/2000/01/rdf-schema#</a>"
+    xmlns:foaf="<a href="http://xmlns.com/foaf/0.1/" class="external free" title="http://xmlns.com/foaf/0.1/" rel="nofollow">http://xmlns.com/foaf/0.1/</a>"
+    xmlns:admin="<a href="http://webns.net/mvcb/" class="external free" title="http://webns.net/mvcb/" rel="nofollow">http://webns.net/mvcb/</a>"&gt;
+  &lt;foaf:PersonalProfileDocument rdf:about=""&gt;
+    &lt;foaf:maker rdf:resource="#me"/&gt;
+    &lt;foaf:primaryTopic rdf:resource="#me"/&gt;
+    &lt;admin:generatorAgent rdf:resource="<a href="http://www.ldodds.com/foaf/foaf-a-matic" class="external free" title="http://www.ldodds.com/foaf/foaf-a-matic" rel="nofollow">http://www.ldodds.com/foaf/foaf-a-matic</a>"/&gt;
+    &lt;admin:errorReportsTo rdf:resource="<a href="mailto:leigh@ldodds.com" class="external free" title="mailto:leigh@ldodds.com" rel="nofollow">mailto:leigh@ldodds.com</a>"/&gt;
+  &lt;/foaf:PersonalProfileDocument&gt;
+  &lt;foaf:Person rdf:ID="me"&gt;
+    &lt;foaf:name&gt;Yosuke Funahashi&lt;/foaf:name&gt;
+    &lt;foaf:title&gt;Mr&lt;/foaf:title&gt;
+    &lt;foaf:givenname&gt;Yosuke&lt;/foaf:givenname&gt;
+    &lt;foaf:family_name&gt;Funahashi&lt;/foaf:family_name&gt;
+    &lt;foaf:mbox rdf:resource="<a href="mailto:yfuna@tomo-digi.co.jp" class="external free" title="mailto:yfuna@tomo-digi.co.jp" rel="nofollow">mailto:yfuna@tomo-digi.co.jp</a>"/&gt;
+    &lt;foaf:workplaceHomepage rdf:resource="<a href="http://www.tomo-digi.co.jp/" class="external free" title="http://www.tomo-digi.co.jp/" rel="nofollow">http://www.tomo-digi.co.jp/</a>"/&gt;
+    &lt;foaf:knows&gt;
+      &lt;foaf:Person&gt;
+	&lt;foaf:name&gt;Timothy Berners-Lee&lt;/foaf:name&gt;
+      &lt;foaf:mbox rdf:resource="<a href="mailto:timbl@w3.org" class="external free" title="mailto:timbl@w3.org" rel="nofollow">mailto:timbl@w3.org</a>"/&gt;&lt;/foaf:Person&gt;
+    &lt;/foaf:knows&gt;
+  &lt;/foaf:Person&gt;
+&lt;/rdf:RDF&gt;
+</pre>
+</ul>
+</li>
+<li> Basic Information
+<ul>
+<li> SDO: <a href="http://www.foaf-project.org/">FOAF project</a></li>
+<li> Creation Date: Mid 2000</li>
+<li> Adoption: N/A</li>
+<li> License: <a href="http://creativecommons.org/licenses/by/1.0/">Creative Commons Attribution License</a></li>
+<li> Specs: <a href="http://xmlns.com/foaf/spec/">FOAF Vocabulary Specification 0.98</a></li>
+</ul>
+</li>
+
+<li> Primary Functions
+<ul>
+<li> N/A</li>
+</ul>
+</li>
+
+<li> Important Actors
+<ul>
+<li> N/A</li>
+</ul>
+</li>
+
+<li> Primary Scenarios
+<ul>
+<li> N/A</li>
+</ul>
+</li>
+
+<li> Note
+<ul>
+<li> FOAF is an application of Semantic Web technologies, so many Semantic Web tools and techniques are available to search for and locate information about individuals without requiring a centralised database.</li>
+<li> Authorization by FOAF + identity technologies</li>
+<ul>
+<li>Identity technologies such as OpenID and WebID can be used to build a Web of trust using FOAF ontology by allowing people to link together their profiles in a public or protected manner. Such a web of trust can then be used by a Service to make authorization decisions, by allowing access to resource depending on the properties of an agent, such that he/she is known by some relevant people, works at a given company, is a family member, is part of some group, etc..</li>
+</ul>
+</ul>
+</li>
+</ul></section>
+
+</section>
+
+
+    <section class="appendix" id="acknowledgements">
+      <!--OddPage--><h2><span class="secno">A. </span>Acknowledgements</h2>
+      <p>
+        Thanks to Tim Berners-Lee for inventing HTML, without which none of this would exist.
+      </p>
+      <p>
+      	The editors would like to thank Shoko Okuma for her contributions to this note.
+<contributors>
+      </contributors></p>
+    </section>
+  
+
+</body>
